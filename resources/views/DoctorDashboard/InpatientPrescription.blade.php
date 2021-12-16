@@ -37,7 +37,7 @@
                                 <tr>
                                     <td>{{ $list->id}}</td>
                                     <td>{{ $list->patient_id}}</td>
-                                    <td>{{ $list->doctort_id}}</td>
+                                    <td>{{ $list->doctor_id}}</td>
                                     <td>{{ $list->department_id}}</td>
                                     <td>{{ $list->pres_disease}}</td>
                                     <td>{{ $list->medicines}}</td>

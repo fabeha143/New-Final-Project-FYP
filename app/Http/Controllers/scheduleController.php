@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\inpatient_prescription;
+use App\Models\employee;
+use App\Models\dose_schedule;
 use Illuminate\Http\Request;
 
 class scheduleController extends Controller
@@ -13,7 +15,9 @@ class scheduleController extends Controller
      */
     public function index()
     {
-        return view('AdminPanel/Dose Scheduling/schedule_create');
+        $inpatientDetail = inpatient_prescription::all();
+        
+        return view('AdminPanel/Dose Scheduling/schedule_create',compact('inpatientDetail'));
         
     }
 
@@ -22,9 +26,17 @@ class scheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('AdminPanel/Dose Scheduling/create_sched');
+        $allfields = inpatient_prescription::where('id',$id)->first();
+        $attendant = employee::select('id','emp_fname')->where('role','Attendant')->get();
+        
+        $name = array();
+
+        foreach($attendant as $data){
+            $name[$data->id] = $data->emp_fname;
+        }
+        return view('AdminPanel/Dose Scheduling/create_sched',compact('allfields','name'));
     }
 
     /**
@@ -33,9 +45,24 @@ class scheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id=null)
     {
-        //
+        dose_schedule::create([
+            'pres_disease' => $request->pres_disease,
+            'medicines' => $request->medicines,
+            'weeks' => $request->weeks,
+            'from_date' => $request->from_date,
+            'till_date' => $request->till_date,
+            'dosage' => $request->dosage,
+            'patient_cat' => $request->patient_cat,
+            'description' => $request->description,
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'department_id' => $request->department_id,
+            'attendant_name' => $request->attendant_name,
+            'prescription_id' => $request->id,
+        ]);
+        redirect()->back();
     }
 
     /**

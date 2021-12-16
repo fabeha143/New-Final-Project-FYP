@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::group(['middleware'=>'auth'], function(){
-    
-Route::view('/forgetpassword', 'forgetpass');
 
+Route::group(['middleware'=>'auth'], function(){
+    Route::view('/forgetpassword', 'forgetpass');
+    
 
 ///////////////////////////////Admin/////////////////////////////////////////////
 
@@ -34,14 +34,17 @@ Route::resource('employee','employeeController');
 Route::resource('employeeRole','employee_role_controller');
 Route::resource('department','departmentController');
 Route::resource('medicine','medicineController');
-Route::resource('doseschedule','doseschedController');
+Route::resource('doseschedule','doselist');
 Route::resource('schedule','scheduleController');
+Route::get('/createschedule/{id}', [App\Http\Controllers\scheduleController::class, 'create'])->name('createschedule');
+Route::post('/addattendant/{id}', [App\Http\Controllers\scheduleController::class, 'store'])->name('addattendant');
 Route::resource('medicinesCategory','med_cat_controller');
 
 //Mail
-Route::get('/profile', [App\Http\Controllers\profileController::class,'index'])->name('profile');
+Route::resource('inbox','mailController');
+Route::get('/inbox/create', [App\Http\Controllers\mailController::class,'create'])->name('/inbox/create');
 //profile
-Route::get('/inbox', [App\Http\Controllers\mailController::class,'index'])->name('inbox');
+Route::get('/profile', [App\Http\Controllers\profileController::class,'index'])->name('profile');
 
 ///////////////////////////////Admin/////////////////////////////////////////////
 
@@ -64,11 +67,14 @@ Route::resource('Inpatientprescription','inpatient_pres_controller');
 ///////////////////////////////Doctor/////////////////////////////////////////////
 
 ///////////////////////////////Attendant/////////////////////////////////////////////
-// Route::get('/attendantdash ', [App\Http\Controllers\attendantdashController::class, 'index'])->name('index');
+ Route::get('/attendantdash', [App\Http\Controllers\attendantdashController::class, 'index'])->name('index');
+ Route::post('/attendantdashstore/{id}', [App\Http\Controllers\attendantdashController::class, 'store'])->name('attendantdashstore');
+ 
+ ///////////////////////////////Attendant/////////////////////////////////////////////
 
-///////////////////////////////Attendant/////////////////////////////////////////////
-
-
-    Route::get('/dashboard',[App\Http\Controllers\DashboardCOntroller::class , 'index'])->name('dashboard');
-    // });
-require __DIR__.'/auth.php';
+ 
+ Route::get('/dashboard',[App\Http\Controllers\DashboardCOntroller::class , 'index'])->name('dashboard');
+ 
+});
+ require __DIR__.'/auth.php';
+ 

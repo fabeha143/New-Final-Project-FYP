@@ -45,7 +45,7 @@
                                         <td>{{ $list->emp_fname}}</td>
                                         <td>{{ $list->emp_lname}}</td>
                                         <td>{{ $list->emp_gender}}</td>
-                                        <td>{{ $list->role_id}}</td>
+                                        <td>{{ $list->role}}</td>
                                         <td>{{ $list->emp_joining_date}}</td>
                                         <td>{{ $list->emp_phone}}</td>
                                         <td>{{ $list->emp_address}}</td>

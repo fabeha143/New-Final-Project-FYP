@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                            {{ Form::select('medicines',$medicine,'null',['class'=> 'form-control' , 'placeholder' => 'Please Select Weeks' ] )}}
+                            {{ Form::select('medicines',$medicine,'null',['class'=> 'form-control' , 'placeholder' => 'Please Select Medicines' ] )}}
                             </div>
                             
                         </div>
@@ -81,6 +81,20 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                     {{ Form::hidden('patient_id' ,$patients->id)}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                    {{ Form::hidden('doctor_id' ,$patients->doctor)}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                    {{ Form::hidden('department_id' ,$patients->department) }}
                                     </div>
                                 </div>
                             </div>

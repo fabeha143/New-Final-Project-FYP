@@ -15,7 +15,7 @@
 					<div class="header">
 						<h2>Basic Information <small>Description text here...</small> </h2> 
 					</div>
-					{{ Form::open(array('url' => route('employee.update', ['employee' => $employeeEdit->id , 'emp_role_data' =>  $emp_role_data]), 'method' => 'put' , 'class' => 'body')) }}
+					{{ Form::open(array('url' => route('employee.update', ['employee' => $employeeEdit->id]), 'method' => 'put' , 'class' => 'body')) }}
                         <div class="row clearfix">
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
@@ -57,7 +57,7 @@
                             </div>
                              <div class="col-lg-4">
                                 <div class="form-group drop-custum">
-                                {{ Form::select('role_id',$emp_role_data,'null',['class'=> 'form-control' , 'placeholder' => 'Please Select Role' ]) }}
+                                {{ Form::select('role',array('Doctor' => 'Doctor' , 'Admin' => 'Admin', 'Attendant' => 'Attendant'),'null',['class'=> 'form-control' , 'placeholder' => 'Please Select Role' ] )}}
                                 </div>
                             </div> 
                           <div>

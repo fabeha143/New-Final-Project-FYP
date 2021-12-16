@@ -27,15 +27,8 @@ class employeeController extends Controller
      */
     public function create()
     {
-        $items = employee_role::select('id','role_name')->get();
         
-        $employee_role = array();
-        foreach( $items as $item )
-        {
-            $employee_role[$item->id] = $item->role_name;
-        }
-        
-        return view('AdminPanel/employee/add_employee',compact('employee_role'));
+        return view('AdminPanel/employee/add_employee');
     }
 
     /**
@@ -50,11 +43,12 @@ class employeeController extends Controller
         employee::create([
             'emp_fname' => $request->Fname,
             'emp_lname' => $request->lname,
+            'emp_email' => $request->email,
             'emp_gender' => $request->gender,
             'emp_joining_date' => $request->joining_date,
             'emp_phone' => $request->phone,
             'emp_address' => $request->address,
-            'role_id' => $request->role_id,
+            'role' => $request->role,
         ]);
         return redirect(route('employee.index'));
        
@@ -81,15 +75,9 @@ class employeeController extends Controller
     {
         $employeeEdit  = employee::where('id' , $id)->first();
 
-        $employee_role = employee_role::all();
-        $emp_role_data = array();
+      
 
-        foreach( $employee_role as $role )
-        {            
-            $emp_role_data[$role->id] = $role->role_name; 
-        }
-
-        return view('AdminPanel/employee/edit_employee',compact('employeeEdit','emp_role_data') );
+        return view('AdminPanel/employee/edit_employee',compact('employeeEdit') );
     }
 
     /**
@@ -108,7 +96,7 @@ class employeeController extends Controller
             'emp_joining_date' => $request->joining_date,
             'emp_phone' => $request->phone,
             'emp_address' => $request->address,
-            'role_id' => $request->role_id,
+            'role' => $request->role,
         ]);
         return redirect(route('employee.index'));  
     }

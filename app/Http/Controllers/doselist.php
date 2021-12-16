@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\dose_schedule;
 use Illuminate\Http\Request;
 
-class doseschedController extends Controller
+class doselist extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,10 @@ class doseschedController extends Controller
      */
     public function index()
     {
-        return view('AdminPanel/Dose Scheduling/dose_sched');
+        $dose_schedule = dose_schedule::all();
+        return view('AdminPanel/Dose Scheduling/dose_sched',compact('dose_schedule'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -78,6 +80,7 @@ class doseschedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dose_schedule::where('id' , $id)->delete();
+        return redirect(route('doseschedule.index'));
     }
 }

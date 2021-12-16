@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group drop-custum">
-                                {{ Form::select('gender',array('Female' => 'Female' , 'Male' => 'Male'),'null',['class'=> 'form-control' , 'placeholder' => 'Please Select' ] )}}
+                                {{ Form::select('gender',array('Female' => 'Female' , 'Male' => 'Male'),'null',['class'=> 'form-control' , 'placeholder' => 'Please Select Gender' ] )}}
                                 </div>
                             </div>
                             
@@ -56,7 +56,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group" >
                                 <div class="form-line">
-                                    {{ Form::select('role_id',$employee_role,null,array('class' => 'form-control','placeholder' => 'Select Role'))}}
+                                {{ Form::select('role',array('Doctor' => 'Doctor' , 'Admin' => 'Admin', 'Attendant' => 'Attendant'),'null',['class'=> 'form-control' , 'placeholder' => 'Please Select Role' ] )}}
                                 </div>
                             </div>
                             <i class="zmdi zmdi-chevron-down" style="position: absolute; right:29px; top:8px"></i>

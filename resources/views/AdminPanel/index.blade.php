@@ -54,9 +54,9 @@
                         <h2>Hospital Survey</h2>
                     </div>
                     <div class="body">
-                        <div>
-                            <div id="linechart" style="width: 900px; height: 500px"></div>
-                        </div>
+                        
+                        <canvas id="line_chart" height="70"></canvas>
+                        
                     </div>
                 </div>
             </div>

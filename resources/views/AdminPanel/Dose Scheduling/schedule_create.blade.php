@@ -24,19 +24,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @if(count($inpatientDetail))
+                                @foreach($inpatientDetail as $list)
                                 <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>22</td>
-                                    <td class="d-flex justify-content-center"><a class="btn btn-primary btn-sm" href="{{ route('schedule.create') }}">Set Schedule</a></td>
+                                    <td>{{ $list->patient_id}}</td>
+                                    <td>{{ $list->doctor_id}}</td>
+                                    <td>{{ $list->id}}</td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm" href="{{ url('/createschedule',$list->id)}}">Set Schedule</a> 
+                                    </td>
                                     
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>22</td>
-                                    <td class="d-flex justify-content-center"><a class="btn btn-primary btn-sm" href="{{ route('schedule.create') }}">Set Schedule</a></td>
-                                </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
