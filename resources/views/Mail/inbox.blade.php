@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 @section('content')
 <ul id="f-menu" class="mfbc-br mfb-zoomin" data-mfb-toggle="hover">
@@ -20,6 +21,8 @@
                         <div class="mail_listing table-responsive">
                             <table class="table table_custom table-hover">
                                 <tbody>
+                                @if(count($inboxdata))
+                                    @foreach($inboxdata as $list)
                                     <tr class="unread">
                                         <td>
                                             <div class="checkbox">
@@ -28,13 +31,19 @@
                                             </div>
                                         </td>                                    
                                         <td class="hidden-sm-down"><i class="zmdi zmdi-star-outline"></i></td>
-                                        <td class="hidden-sm-down hidden-md-down">Hamza</td>
+                                        <td class="hidden-sm-down hidden-md-down">{{ $list->user->name}}</td>
                                         <td class="max-texts">
-                                            <a href="javascript:void(0);">Lorem ipsum perspiciatis unde omnis iste natus error sit voluptatem</a>
+                                            <a href="{{route('/inbox/singlemail',$list->id)}}">{{ $list->subject}}</a>
                                         </td>
                                         <td class="hidden-sm-down"><i class="zmdi zmdi-attachment-alt"></i></td>
-                                        <td class="text-right"> 12:30 PM </td>
+                                        <td class="text-right"> {{ $list->created_at }} </td>
                                     </tr>
+                                    @endforeach
+                                    @else
+                                    <tr>
+                                        <td colspan="6">No data found!!</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

@@ -70,7 +70,7 @@
         <div class="user-info">
             <div class="admin-image"> <img src="/images/random-avatar7.jpg" alt=""> </div>
             <div class="admin-action-info"> <span>Welcome</span>
-                <h3>Dr Tania</h3>
+                <h3>{{Auth::user()->name}}</h3>
                 <ul>
                    
                 </ul>

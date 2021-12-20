@@ -9,13 +9,10 @@ class attendantdashController extends Controller
     public function index()
     {
         $dose_schedule = dose_schedule::all();
+        dd($dose_schedule);
         return view('Attendant Dashboard/attendantdash',compact('dose_schedule'));
     }
     public function store(Request $request ,$id)
     {
-
-        dose_schedule::create([
-            'dose_confirm' => $request->dose_confirm
-        ]);
     }
 }

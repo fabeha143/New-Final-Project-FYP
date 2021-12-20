@@ -28,7 +28,7 @@
                             <div class="form-group form-float">
                             <div class="form-line">
                                 {!! Form::textarea('message', null ,array('class' => 'form-control' , 'placeholder' => 'Message')) !!}
-                                
+
                                 </div>
                             </div>
                                

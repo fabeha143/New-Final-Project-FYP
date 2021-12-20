@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 use App\Models\visitors;
+use App\Models\patient;
 use Illuminate\Http\Request;
+
 use DB;
 use Carbon\Carbon;
 
 class chartController extends Controller
 {
     public function chartjs(){
+      $patients = patient::select(DB::raw("COUNT(*) as count"))->whereYear('created_at',date('Y'))->groupBy(DB::raw("Month(created_at)"))->pluck('count');
+      
+      $months = patient::select(DB::raw("Month(created_at) as month"))->whereYear('created_at',date('Y'))->groupBy(DB::raw("Month(created_at)"))->pluck('month');
 
-       $visitor = visitors::select(\DB::raw("year(created_at) as year"),\DB::raw("SUM(click) as total_click"),\DB::raw("SUM(viewer) as total_viewer"))->orderBy("created_at")->groupBy(DB::raw("year(created_at)"))->get();
-       
-          $result[] = ['Year','Click','Viewer'];
-       
-          foreach ($visitor as $key => $value) {
-               $result[++$key] = [$value->year, (int)$value->total_click, (int)$value->total_viewer];
-           
-               }
-            return view('AdminPanel/index')->with('visitor',json_encode($result));
+      $datas = array(0,0,0,0,0,0,0,0,0,0,0,0);
+      foreach($months as $index => $month){
+         $datas[$month] = $patients[$index];
+      }
+      return view('AdminPanel/index',compact('datas'));
     }  
 }

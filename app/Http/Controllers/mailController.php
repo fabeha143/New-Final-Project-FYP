@@ -15,7 +15,7 @@ class mailController extends Controller
      */
     public function index()
     {
-        $inboxdata = mail::where('To', Auth::user()->id)->get();
+        $inboxdata = mail::where('To', Auth::user()->email)->get();
         return view('mail/inbox', ['inboxdata' => $inboxdata]);
     }
 
@@ -43,6 +43,7 @@ class mailController extends Controller
             'message' => $request->message,
             'from' => auth()->id()
         ]);
+        return redirect(route('inbox.index'))->with(['success' => 'Message sent!!']);
     }
 
     /**
@@ -53,7 +54,8 @@ class mailController extends Controller
      */
     public function show($id)
     {
-        //
+        $singlemail = mail::all()->where('from',$id);
+        return view('mail/singlemail',compact('singlemail'));
     }
 
     /**
@@ -87,6 +89,7 @@ class mailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        mail::where('id' , $id)->delete();
+        return redirect(route('inbox.index'));
     }
 }

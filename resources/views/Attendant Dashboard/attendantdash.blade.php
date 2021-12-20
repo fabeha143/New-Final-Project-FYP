@@ -50,16 +50,20 @@
                                     <td>{{ $list->description}}</td>
                                     <td>{{ $list->medicines}}</td>
                                     <td>{{ $list->attendant_name}}</td>
-                                    <td>
-                                    {!! Form::open(array('url' => route('attendantdashstore.store', ['attendantdashstore' => $list->patient_id]), 'method' => 'post')) !!}
-                                        {!! Form::checkbox('dose_confirm', '1'); !!}
+                                    <td> 
+                                    {!! Form::open() !!}
+                                        {!! Form::checkbox('dose_schedule', null,array('class'=> 'form-check-input')) !!}
                                     {!! Form::close() !!}
                                     </td>
                                     
                                 </tr>
                                 @endforeach
-                            @endif
-                                
+                           
+                            @else
+                            <tr>
+                                <td colspan="14">No Data found!!</td>
+                            </tr>
+                             @endif    
                             </tbody>
                         </table>
                     </div>

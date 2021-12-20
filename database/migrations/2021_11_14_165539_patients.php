@@ -27,6 +27,7 @@ class Patients extends Migration
             $table->foreignId('doctor')->constrained('doctors');
             $table->foreignId('department')->constrained('departments');
             $table->string('status');
+            $table->timestamps();
         });
     }
 

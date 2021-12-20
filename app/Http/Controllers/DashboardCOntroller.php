@@ -10,11 +10,25 @@ use App\Models\employee;
 use App\Models\inpatient_prescription;
 use App\Models\appointments;
 use Illuminate\Http\Request;
+use DB;
+use App\Models\dose_schedule;
+use Carbon\Carbon;
+
 
 class DashboardCOntroller extends Controller
 {
     public function index()
     {
+        $patients = patient::select(DB::raw("COUNT(*) as count"))->whereYear('created_at',date('Y'))->groupBy(DB::raw("Month(created_at)"))->pluck('count');
+      
+        $months = patient::select(DB::raw("Month(created_at) as month"))->whereYear('created_at',date('Y'))->groupBy(DB::raw("Month(created_at)"))->pluck('month');
+  
+        $datas = array(0,0,0,0,0,0,0,0,0,0,0,0);
+        foreach($months as $index => $month){
+           $datas[$month] = $patients[$index];
+        }
+
+
         $patient = patient::all()->count();
         $doctor = doctor::all()->count();
         $employee = employee::all()->count();
@@ -28,10 +42,11 @@ class DashboardCOntroller extends Controller
         $patientAll = patient::all();
 
 
+        $dose_schedule = dose_schedule::all();
 
         if(Auth::user()->hasRole('admin')){
 
-            return view('AdminPanel/index',compact('patient','doctor','employee','appointments','appointmentsall'));
+            return view('AdminPanel/index',compact('patient','doctor','employee','appointments','appointmentsall','datas'));
         }
         elseif(Auth::user()->hasRole('doctor')){
 
@@ -39,7 +54,7 @@ class DashboardCOntroller extends Controller
         }
         elseif(Auth::user()->hasRole('attendant')){
             
-            return view('Attendant Dashboard/attendantdash');
+            return view('Attendant Dashboard/attendantdash',compact('dose_schedule'));
         }
     }
 }

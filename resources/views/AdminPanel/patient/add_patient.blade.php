@@ -20,21 +20,21 @@
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                    {{ Form::text('Fname','First Name',array('class' => 'form-control'))}}
+                                    {{ Form::text('Fname',null,array('class' => 'form-control','placeholder' => 'First Name'))}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                    {{ Form::text('lname','Last Name',array('class' => 'form-control'))}}
+                                    {{ Form::text('lname',null,array('class' => 'form-control','placeholder' => 'Last Name'))}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                    {{ Form::date('date_of_birth','Date of Birth',array('class' => 'form-control'))}}
+                                    {{ Form::date('date_of_birth','Date of Birth',array('class' => 'form-control','placeholder' => 'Date of Birth'))}}
                                     </div>
                                 </div>
                             </div>
@@ -43,14 +43,14 @@
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                    {{ Form::date('addmission_date','Addmission Date',array('class' => 'form-control'))}}
+                                    {{ Form::date('addmission_date','Addmission Date',array('class' => 'form-control','placeholder' => 'Addmission Date'))}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                    {{ Form::email('email','Email',array('class' => 'form-control'))}}
+                                    {{ Form::email('email',null,array('class' => 'form-control','placeholder' => 'Email'))}}
                                     </div>
                                 </div>
                             </div>
@@ -67,14 +67,14 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                    {{ Form::text('address','Address',array('class' => 'form-control'))}}
+                                    {{ Form::text('address',null,array('class' => 'form-control','placeholder' => 'Address'))}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                    {{ Form::text('phone','Phone Number',array('class' => 'form-control'))}}
+                                    {{ Form::text('phone',null,array('class' => 'form-control','placeholder' => 'Phone'))}}
                                     </div>
                                 </div>
                             </div>

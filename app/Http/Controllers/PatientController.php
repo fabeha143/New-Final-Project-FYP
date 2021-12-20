@@ -7,6 +7,7 @@ use App\Models\departments;
 use Illuminate\Http\Request;
 
 
+
 class PatientController extends Controller
 {
     /**
@@ -16,8 +17,9 @@ class PatientController extends Controller
      */
     public function index()
     {
+        
        $patients = patient::all();
-        return view('AdminPanel/patient/patientdetail',['patients' => $patients]);
+        return view('AdminPanel/patient/patientdetail',compact('patients'));
     }
 
     /**

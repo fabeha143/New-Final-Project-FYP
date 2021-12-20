@@ -124,17 +124,18 @@ function getRandomData() {
 
 $(function () {
     new Chart(
-        document.getElementById("line_chart").getContext("2d"),
-        getChartJs("line")
+        document.getElementById("bar_chart").getContext("2d"),
+        getChartJs("bar")
+        
     );
 });
 
 function getChartJs(type) {
     var config = null;
-
-    if (type === "line") {
+    
+    if (type === "bar") {
         config = {
-            type: "line",
+            type: "bar",
             data: {
                 labels: [
                     "January",

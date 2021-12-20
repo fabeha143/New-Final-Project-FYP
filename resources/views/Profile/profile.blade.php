@@ -9,8 +9,8 @@
                     <div class="profile-header">
                         <div class="profile_info">
                             <div class="profile-image"> <img src="assets/images/random-avatar7.jpg" alt=""> </div>
-                            <h4 class="mb-0"><strong>Fabeha</strong> Naqvi</h4>
-                            <span class="text-muted col-white">Admin</span>
+                            <h4 class="mb-0"><strong>{{ $UserData->name }}</strong></h4>
+                            <span class="text-muted col-white"> @foreach ($roles as $role) {{$role}} @endforeach</span>
                         </div>
                     </div>
                     <div class="profile-sub-header">
@@ -53,47 +53,33 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane in active" id="mypost">
                                 <div class="wrap-reset">
-                                    <div class="mypost-form">
+                                    {{ Form::open(array('route' => 'addpost' , 'method' => 'POST', 'class' => 'mypost-form')) }}
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <textarea rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+                                                {{ Form::textarea('post',null,array('class' => 'form-control no-resize', 'placeholder'=> 'Write Your Post...'))}}
                                             </div>
                                         </div>
-                                        <div class="post-toolbar-b"> <a href="javascript:void(0);" tooltip="Add File" class="btn btn-primary  btn-sm"><i class="zmdi zmdi-attachment"></i></a> <a href="javascript:void(0);" class="pull-right btn btn-primary btn-success btn-sm" tooltip="Post it!">Post</a> </div>
-                                    </div>
+                                        <div class="post-toolbar-b"> {{ Form::submit('Submit',array('class' => 'pull-right btn btn-primary btn-success btn-sm'))}}</div>
+                                    
+
                                     <div class="mypost-list">
+                                    @if(count($posts))
+                                        @foreach($posts as $list)
                                         <div class="post-box">
-                                            <span class="text-muted text-small"><i class="zmdi zmdi-alarm"></i> 3 minutes ago</span>
-                                            <div class="post-img"><img src="http://via.placeholder.com/1000x400" class="img-fluid" alt /></div>
+                                            <span class="text-muted text-small"><i class="zmdi zmdi-alarm"></i> {{ $list->created_at}}</span>
+                                            <div class="post-img"><img src="images/newsletter-bg.jpg" class="img-fluid" alt /></div>
                                             <div>
-                                                <h5>Lorem Ipsum is simply dummy text of the printing</h5>
-                                                <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                                                <p> <a href="javascript:void(0);" class="btn btn-raised btn-info btn-sm"><i class="zmdi zmdi-favorite-outline"></i> Like (5) </a> <a href="javascript:void(0);" class="btn btn-primary bg-soundcloud btn-sm"><i class="zmdi zmdi-long-arrow-return"></i> Reply</a> </p>
+                                                <h5>BLOGS</h5>
+                                                <p class="mb-0">{{ $list->posts }}</p>
+                                                <a class="btn btn-danger btn-sm" href="{{ url('/distroy',$list->id)}}">Delete</a>
                                             </div>
                                         </div>
                                         <hr>
-                                        <div class="post-box">
-                                            <span class="text-muted text-small"><i class="zmdi zmdi-alarm"></i> 23 minutes ago</span>
-                                            <div class="post-img"><img src="http://via.placeholder.com/1000x400" class="img-fluid" alt /></div>
-                                            <div>
-                                                <h5>Lorem Ipsum is simply dummy text of the printing</h5>
-                                                <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                                                <p> <a href="javascript:void(0);" class="btn btn-raised btn-info btn-sm"><i class="zmdi zmdi-favorite-outline"></i> Like (5) </a> <a href="javascript:void(0);" class="btn btn-primary bg-soundcloud btn-sm"><i class="zmdi zmdi-long-arrow-return"></i> Reply</a> </p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="post-box">
-                                            <span class="text-muted text-small"><i class="zmdi zmdi-alarm"></i> 45 minutes ago</span>
-                                            <div class="post-img"><img src="http://via.placeholder.com/1000x400" class="img-fluid" alt /></div>
-                                            <div>
-                                                <h5>Lorem Ipsum is simply dummy text of the printing</h5>
-                                                <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                                                <p> <a href="javascript:void(0);" class="btn btn-raised btn-info btn-sm"><i class="zmdi zmdi-favorite-outline"></i> Like (5) </a> <a href="javascript:void(0);" class="btn btn-primary bg-soundcloud btn-sm"><i class="zmdi zmdi-long-arrow-return"></i> Reply</a> </p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="text-center"> <a href="javascript:void(0);" class="btn btn-primary ">Load More …</a> </div>
+                                    
+                                        @endforeach
+                                    @endif
                                     </div>
+                                    {{ Form::close() }}
                                 </div>
                             </div>
                             
