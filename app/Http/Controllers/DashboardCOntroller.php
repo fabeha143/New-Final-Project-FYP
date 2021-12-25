@@ -19,6 +19,7 @@ class DashboardCOntroller extends Controller
 {
     public function index()
     {
+        //chart work//
         $patients = patient::select(DB::raw("COUNT(*) as count"))->whereYear('created_at',date('Y'))->groupBy(DB::raw("Month(created_at)"))->pluck('count');
       
         $months = patient::select(DB::raw("Month(created_at) as month"))->whereYear('created_at',date('Y'))->groupBy(DB::raw("Month(created_at)"))->pluck('month');
@@ -27,6 +28,11 @@ class DashboardCOntroller extends Controller
         foreach($months as $index => $month){
            $datas[$month] = $patients[$index];
         }
+
+        //chart work//
+
+
+
 
 
         $patient = patient::all()->count();
@@ -54,7 +60,7 @@ class DashboardCOntroller extends Controller
         }
         elseif(Auth::user()->hasRole('attendant')){
             
-            return view('Attendant Dashboard/attendantdash',compact('dose_schedule'));
+            return view('Attendant Dashboard/dashboard');
         }
     }
 }

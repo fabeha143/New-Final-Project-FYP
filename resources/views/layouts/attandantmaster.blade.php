@@ -89,6 +89,7 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">MAIN NAVIGATION</li>
+                <li><a href="{{ url('/dashboard')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>   
                 <li><a href="{{ url('/attendantdash')}}"><i class="zmdi zmdi-home"></i><span>Schedule List</span></a></li>                                                
                 
             </ul>

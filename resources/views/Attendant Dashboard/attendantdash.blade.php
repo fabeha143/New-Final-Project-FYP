@@ -51,8 +51,8 @@
                                     <td>{{ $list->medicines}}</td>
                                     <td>{{ $list->attendant_name}}</td>
                                     <td> 
-                                    {!! Form::open() !!}
-                                        {!! Form::checkbox('dose_schedule', null,array('class'=> 'form-check-input')) !!}
+                                    {!! Form::open(array('url' => route('attendantdashstore',$list->id), 'method' => 'post')) !!}
+                                        {!! Form::submit('done', array('class' => 'btn btn-primary openbutton')) !!}
                                     {!! Form::close() !!}
                                     </td>
                                     

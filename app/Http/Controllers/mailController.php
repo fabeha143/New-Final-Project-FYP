@@ -1,95 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\mail;
-use App\Models\User;
+
+use App\Mail\testMail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
-class mailController extends Controller
+class mailCOntroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $inboxdata = mail::where('To', Auth::user()->email)->get();
-        return view('mail/inbox', ['inboxdata' => $inboxdata]);
-    }
+    public function composeMail(){
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('mail/composemail');
-    }
+       return view('Mail/composemail');
+     
+ }
+    public function index(Request $request){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        mail::create([
-            'To' => $request->to,
-            'subject' => $request->subject,
-            'message' => $request->message,
-            'from' => auth()->id()
-        ]);
-        return redirect(route('inbox.index'))->with(['success' => 'Message sent!!']);
-    }
+       $details = [
+           'subject' => $request->subject,
+           'body' => $request->message,
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $singlemail = mail::all()->where('from',$id);
-        return view('mail/singlemail',compact('singlemail'));
-    }
+       ];
+       Mail::to($request->to)->send(new testMail($details));
+       return redirect()->back( );
+    
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        mail::where('id' , $id)->delete();
-        return redirect(route('inbox.index'));
-    }
 }

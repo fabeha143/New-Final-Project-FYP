@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                {{ Form::open(array('route' => 'inbox.store' , 'method' => 'POST' , 'class' => 'body')) }}
+                {{ Form::open(array('route' => '/inbox/send' , 'method' => 'POST' , 'class' => 'body')) }}
                     <div class="row clearfix">
                         <div class="col-lg-12">
                             <div class="form-group">

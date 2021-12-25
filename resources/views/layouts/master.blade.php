@@ -50,7 +50,7 @@
     <div class="col-12">
         <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="index.php">Good Health</a> </div>
         <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url('/inbox')}}" title="Go to Inbox"><i class="zmdi zmdi-email"></i></a></li>
+                <li><a href="{{ url('/inbox/create')}}" title="Go to Inbox"><i class="zmdi zmdi-email"></i></a></li>
                 <li><a href="{{ url('/profile')}}" title="Go to Profile"><i class="zmdi zmdi-account"></i></a></li>
                 <li style="margin-top:8px;">
                     <form method="POST" action="{{route('logout')}}">

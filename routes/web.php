@@ -41,9 +41,9 @@ Route::post('/addattendant/{id}', [App\Http\Controllers\scheduleController::clas
 Route::resource('medicinesCategory','med_cat_controller');
 
 //Mail
-Route::resource('inbox','mailController');
-Route::get('/inbox/create', [App\Http\Controllers\mailController::class,'create'])->name('/inbox/create');
-Route::get('/inbox/singlemail/{id}' , [App\Http\Controllers\mailController::class,'show'])->name('/inbox/singlemail');
+Route::get('/inbox/create', [App\Http\Controllers\mailCOntroller::class,'composeMail'])->name('/inbox/create');
+Route::post('/inbox/send', [App\Http\Controllers\mailCOntroller::class,'index'])->name('/inbox/send');
+// Route::get('/inbox/compose/mail' , [App\Http\Controllers\mailCOntroller::class,'index'])->name('/inbox/compose/mail');
 
     
 
@@ -72,11 +72,24 @@ Route::resource('Inpatientprescription','inpatient_pres_controller');
 ///////////////////////////////Doctor/////////////////////////////////////////////
 
 ///////////////////////////////Attendant/////////////////////////////////////////////
-//  Route::get('/attendantdash', [App\Http\Controllers\attendantdashController::class, 'index'])->name('index');
- Route::post('/attendantdashstore/{id}', [App\Http\Controllers\DashboardCOntroller::class, 'index'])->name('attendantdashstore');
+ Route::get('/attendantdash', [App\Http\Controllers\attendantdashController::class, 'index'])->name('index');
+ Route::post('/attendantdashstore/{id}', [App\Http\Controllers\attendantdashController::class, 'store'])->name('attendantdashstore');
  
  ///////////////////////////////Attendant/////////////////////////////////////////////
 
+
+ //Website Routes
+Route::view('/home ', 'website/homepage');
+Route::view('/Department ', 'website/departmentweb');
+Route::view('/service ', 'website/serviceweb');
+Route::view('/Doctor ', 'website/doctorweb');
+Route::view('/DoctorDetail ', 'website/doctorwebDetail');
+Route::view('/contactus ', 'website/contactus');
+Route::view('/Appointment ', 'website/appointmentweb');
+Route::view('/faq ', 'website/faqWeb');
+Route::view('/loginpatient ', 'website/loginweb');
+Route::view('/forgetpasswordp ', 'website/forgetpassweb');
+Route::view('/registerw ', 'website/register');
  
  Route::get('/dashboard',[App\Http\Controllers\DashboardCOntroller::class , 'index'])->name('dashboard');
  
